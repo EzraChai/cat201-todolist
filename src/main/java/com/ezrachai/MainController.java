@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
+
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,9 +14,11 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -65,6 +69,11 @@ public class MainController implements Initializable {
 
     @FXML
     private Button deleteButton;
+
+    @FXML
+    private MenuItem editTaskItem;
+    @FXML
+    private MenuItem deleteTaskItem;
 
     public void editTodo() throws IOException {
         TodoItem selected = todoListTableView.getSelectionModel().getSelectedItem();
@@ -159,10 +168,19 @@ public class MainController implements Initializable {
 
         todoListTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             // Enable button if a row is selected
+            editTaskItem.setDisable(newSelection == null);
+            deleteTaskItem.setDisable(newSelection == null);
             editButton.setDisable(newSelection == null);
             deleteButton.setDisable(newSelection == null);
         });
-
         statusColumn.setCellFactory(CheckBoxTableCell.forTableColumn(statusColumn));
+    }
+
+    public void handleExit() {
+        Platform.exit();
+    }
+
+    public void handleAbout() {
+        new Alert(Alert.AlertType.INFORMATION, "A To-Do List App v1.0").showAndWait();
     }
 }
