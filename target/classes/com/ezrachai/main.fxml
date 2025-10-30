@@ -22,11 +22,6 @@
           <Menu mnemonicParsing="false" text="File">
             <items>
                   <MenuItem mnemonicParsing="false" onAction="#openPopUp" text="New Task" />
-              <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
               <MenuItem fx:id="editTaskItem" disable="true" mnemonicParsing="false" onAction="#editTodo" text="Edit Task" />
                   <MenuItem fx:id="deleteTaskItem" disable="true" mnemonicParsing="false" onAction="#deleteTodo" text="Delete Task" />
             </items>
@@ -35,6 +30,11 @@
             <items>
               <MenuItem mnemonicParsing="false" onAction="#handleAbout" text="About" />
             </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Exit">
+               <items>
+              <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+               </items>
           </Menu>
         </menus>
       </MenuBar>
