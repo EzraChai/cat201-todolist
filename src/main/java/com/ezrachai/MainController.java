@@ -1,9 +1,14 @@
 package com.ezrachai;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
@@ -75,6 +80,11 @@ public class MainController implements Initializable {
     @FXML
     private MenuItem deleteTaskItem;
 
+    public void saveTodos() {
+        List<TodoItem> snapshot = new ArrayList<TodoItem>(todoList);
+        new Thread(() -> TodoStore.save(snapshot)).start();
+    }
+
     public void editTodo() throws IOException {
         TodoItem selected = todoListTableView.getSelectionModel().getSelectedItem();
         if (selected == null) {
@@ -124,6 +134,9 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        todoList.addAll(TodoStore.load());
+        todoListTableView.setItems(todoList);
+
         todoColumn.setCellValueFactory(new PropertyValueFactory<>("todo"));
         descColumn.setCellValueFactory(new PropertyValueFactory<>("description"));
         categoryColumn.setCellValueFactory(new PropertyValueFactory<>("category"));
@@ -174,6 +187,7 @@ public class MainController implements Initializable {
             deleteButton.setDisable(newSelection == null);
         });
         statusColumn.setCellFactory(CheckBoxTableCell.forTableColumn(statusColumn));
+
     }
 
     public void handleExit() {

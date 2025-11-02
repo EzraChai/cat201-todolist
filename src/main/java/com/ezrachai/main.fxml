@@ -11,6 +11,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.input.KeyCodeCombination?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -21,9 +22,18 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem mnemonicParsing="false" onAction="#openPopUp" text="New Task" />
-              <MenuItem fx:id="editTaskItem" disable="true" mnemonicParsing="false" onAction="#editTodo" text="Edit Task" />
-                  <MenuItem fx:id="deleteTaskItem" disable="true" mnemonicParsing="false" onAction="#deleteTodo" text="Delete Task" />
+                  <MenuItem mnemonicParsing="false" onAction="#openPopUp" text="New Task">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+              <MenuItem fx:id="editTaskItem" disable="true" mnemonicParsing="false" onAction="#editTodo" text="Edit Task">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
+                  <MenuItem fx:id="deleteTaskItem" disable="true" mnemonicParsing="false" onAction="#deleteTodo" text="Delete Task">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="D" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
@@ -33,7 +43,10 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Exit">
                <items>
-              <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit" />
+              <MenuItem mnemonicParsing="false" onAction="#handleExit" text="Exit">
+                     <accelerator>
+                        <KeyCodeCombination alt="UP" code="Q" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                     </accelerator></MenuItem>
                </items>
           </Menu>
         </menus>

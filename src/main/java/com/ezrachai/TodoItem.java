@@ -3,35 +3,53 @@ package com.ezrachai;
 import javafx.beans.property.*;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class TodoItem {
-    private final StringProperty id;
-    private final StringProperty todo;
-    private final StringProperty description;
-    private final StringProperty category;
-    private final StringProperty priority;
-    private final ObjectProperty<LocalDate> dueDate;
-    private final BooleanProperty status; // <- now a property
+
+    @JsonIgnore
+    private final StringProperty id = new SimpleStringProperty();
+    @JsonIgnore
+    private final StringProperty todo = new SimpleStringProperty("");
+    @JsonIgnore
+    private final StringProperty description = new SimpleStringProperty("");
+    @JsonIgnore
+    private final StringProperty category = new SimpleStringProperty("");
+    @JsonIgnore
+    private final StringProperty priority = new SimpleStringProperty("");
+    @JsonIgnore
+    private final ObjectProperty<LocalDate> dueDate = new SimpleObjectProperty<>();
+    @JsonIgnore
+    private final BooleanProperty status = new SimpleBooleanProperty(false);
+
+    public TodoItem() {
+
+    }
 
     public TodoItem(String id, String todo, String description, String category, String priority, LocalDate dueDate) {
-        this.id = new SimpleStringProperty(id);
-        this.todo = new SimpleStringProperty(todo);
-        this.description = new SimpleStringProperty(description);
-        this.category = new SimpleStringProperty(category);
-        this.priority = new SimpleStringProperty(priority);
-        this.dueDate = new SimpleObjectProperty<>(dueDate);
-        this.status = new SimpleBooleanProperty(false); // default false
+        this.id.set(id);
+        this.todo.set(todo);
+        this.description.set(description);
+        this.category.set(category);
+        this.priority.set(priority);
+        this.dueDate.set(dueDate);
+        this.status.set(false);
     }
 
     // ID
+    @JsonProperty("id")
     public String getId() {
         return id.get();
     }
 
+    @JsonProperty("id")
     public StringProperty idProperty() {
         return id;
     }
 
     // Todo
+    @JsonProperty("todo")
     public String getTodo() {
         return todo.get();
     }
@@ -40,11 +58,13 @@ public class TodoItem {
         todo.set(value);
     }
 
+    @JsonProperty("todo")
     public StringProperty todoProperty() {
         return todo;
     }
 
     // Description
+    @JsonProperty("description")
     public String getDescription() {
         return description.get();
     }
@@ -53,11 +73,13 @@ public class TodoItem {
         description.set(value);
     }
 
+    @JsonProperty("description")
     public StringProperty descriptionProperty() {
         return description;
     }
 
     // Category
+    @JsonProperty("category")
     public String getCategory() {
         return category.get();
     }
@@ -66,11 +88,13 @@ public class TodoItem {
         category.set(value);
     }
 
+    @JsonProperty("category")
     public StringProperty categoryProperty() {
         return category;
     }
 
     // Priority
+    @JsonProperty("priority")
     public String getPriority() {
         return priority.get();
     }
@@ -79,11 +103,13 @@ public class TodoItem {
         priority.set(value);
     }
 
+    @JsonProperty("priority")
     public StringProperty priorityProperty() {
         return priority;
     }
 
     // DueDate
+    @JsonProperty("duedate")
     public LocalDate getDueDate() {
         return dueDate.get();
     }
@@ -95,11 +121,14 @@ public class TodoItem {
         dueDate.set(value);
     }
 
+    @JsonProperty("duedate")
     public ObjectProperty<LocalDate> dueDateProperty() {
         return dueDate;
     }
 
     // Status
+
+    @JsonProperty("status")
     public boolean isStatus() {
         return status.get();
     }
@@ -108,7 +137,9 @@ public class TodoItem {
         status.set(value);
     }
 
+    @JsonProperty("status")
     public BooleanProperty statusProperty() {
         return status;
     }
+
 }

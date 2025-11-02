@@ -1,11 +1,12 @@
 package com.ezrachai;
 
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 
 /**
@@ -19,9 +20,15 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
         Parent root = fxmlLoader.load();
+        MainController controller = fxmlLoader.getController();
+
         scene = new Scene(root, 900, 600);
+        stage.setResizable(false);
+        stage.setTitle("Smart Todo List");
         stage.setScene(scene);
+        stage.setOnCloseRequest(e -> controller.saveTodos());
         stage.show();
+
     }
 
     public static void main(String[] args) {
