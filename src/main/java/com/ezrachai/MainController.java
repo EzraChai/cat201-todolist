@@ -21,6 +21,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
@@ -54,7 +55,9 @@ public class MainController implements Initializable {
     private TextField searchTextField;
 
     @FXML
-    private DatePicker searchDueDate;
+    private DatePicker searchFromDate;
+    @FXML
+    private DatePicker searchToDate;
 
     @FXML
     private ComboBox<String> statusComboBox;
@@ -126,6 +129,8 @@ public class MainController implements Initializable {
         String title = searchTextField.getText().toLowerCase().trim();
         String category = categoryComboBox.getValue();
         String status = statusComboBox.getValue();
+        LocalDate fromDate = searchFromDate.getValue();
+        LocalDate toDate = searchToDate.getValue();
 
         FilteredList<TodoItem> filteredList = new FilteredList<>(todoList, p -> true);
         filteredList.setPredicate(todo -> {
@@ -144,7 +149,9 @@ public class MainController implements Initializable {
                     matchStatus = true;
                     break;
             }
-            return matchTitle && matchCategory && matchStatus;
+            boolean matchLocalFromDate = fromDate == null || todo.getDueDate().isAfter(fromDate);
+            boolean matchLocalToDate = toDate == null || todo.getDueDate().isBefore(toDate);
+            return matchTitle && matchCategory && matchStatus && matchLocalFromDate && matchLocalToDate;
         });
         todoListTableView.setItems(filteredList);
     }
@@ -156,6 +163,7 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+
         todoList.addAll(TodoStore.load());
         todoListTableView.setItems(todoList);
 
@@ -209,6 +217,24 @@ public class MainController implements Initializable {
             deleteButton.setDisable(newSelection == null);
         });
         statusColumn.setCellFactory(CheckBoxTableCell.forTableColumn(statusColumn));
+
+        searchFromDate.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                LocalDate toDate = searchToDate.getValue();
+                setDisable(empty || toDate != null && date.isAfter(toDate));
+            }
+        });
+
+        searchToDate.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                LocalDate fromDate = searchFromDate.getValue();
+                setDisable(empty || fromDate != null && date.isBefore(fromDate));
+            }
+        });
 
     }
 

@@ -55,16 +55,22 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="860.0" spacing="20.0">
                <children>
-                  <VBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="294.0">
+                  <VBox alignment="CENTER_LEFT" prefHeight="49.0" prefWidth="198.0">
                      <children>
                         <Label text="Search" />
-                        <TextField fx:id="searchTextField" onKeyTyped="#filterList" prefHeight="27.0" prefWidth="276.0" />
+                        <TextField fx:id="searchTextField" onKeyTyped="#filterList" prefHeight="27.0" prefWidth="260.0" />
                      </children>
                   </VBox>
-                  <VBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="126.0">
+                  <VBox alignment="CENTER_LEFT" prefHeight="49.0" prefWidth="139.0">
                      <children>
-                        <Label text="Due Date" />
-                        <DatePicker fx:id="searchDueDate" prefHeight="27.0" prefWidth="123.0" />
+                        <Label text="From Date" />
+                        <DatePicker fx:id="searchFromDate" onAction="#filterList" prefHeight="27.0" prefWidth="149.0" showWeekNumbers="true" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER_LEFT" prefHeight="49.0" prefWidth="139.0">
+                     <children>
+                        <Label text="To Date" />
+                        <DatePicker fx:id="searchToDate" onAction="#filterList" prefHeight="27.0" prefWidth="149.0" showWeekNumbers="true" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="140.0">
