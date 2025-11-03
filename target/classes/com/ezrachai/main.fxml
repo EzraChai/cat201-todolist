@@ -58,7 +58,7 @@
                   <VBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="294.0">
                      <children>
                         <Label text="Search" />
-                        <TextField fx:id="searchTextField" onKeyTyped="#searchTodo" prefHeight="27.0" prefWidth="276.0" />
+                        <TextField fx:id="searchTextField" onKeyTyped="#filterList" prefHeight="27.0" prefWidth="276.0" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="126.0">
@@ -70,13 +70,13 @@
                   <VBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="140.0">
                      <children>
                         <Label text="Category" />
-                        <ComboBox fx:id="categoryComboBox" prefWidth="150.0" />
+                        <ComboBox fx:id="categoryComboBox" onAction="#filterList" prefWidth="150.0" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="140.0">
                      <children>
                         <Label text="Status" />
-                        <ComboBox fx:id="statusComboBox" prefWidth="150.0" />
+                        <ComboBox fx:id="statusComboBox" onAction="#filterList" prefWidth="150.0" />
                      </children>
                   </VBox>
                </children>

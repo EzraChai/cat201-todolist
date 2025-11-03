@@ -8,11 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -65,7 +64,7 @@ public class MainController implements Initializable {
     @FXML
     private ComboBox<String> categoryComboBox;
 
-    public String[] categoryItems = { "", "Study", "Personal", "Family" };
+    public String[] categoryItems = { "All", "Study", "Personal", "Family" };
 
     private ObservableList<TodoItem> todoList = FXCollections.observableArrayList();
 
@@ -123,8 +122,31 @@ public class MainController implements Initializable {
         popupStage.showAndWait();
     }
 
-    public void searchTodo() {
-        System.out.println(searchTextField.getText());
+    public void filterList() {
+        String title = searchTextField.getText().toLowerCase().trim();
+        String category = categoryComboBox.getValue();
+        String status = statusComboBox.getValue();
+
+        FilteredList<TodoItem> filteredList = new FilteredList<>(todoList, p -> true);
+        filteredList.setPredicate(todo -> {
+            boolean matchTitle = todo.getTodo().toLowerCase().contains(title);
+            boolean matchCategory = (category == null || category.equals("All") ||
+                    todo.getCategory().equals(category));
+            boolean matchStatus;
+            switch (status) {
+                case "Completed":
+                    matchStatus = todo.isStatus();
+                    break;
+                case "Not Started":
+                    matchStatus = !todo.isStatus();
+                    break;
+                default:
+                    matchStatus = true;
+                    break;
+            }
+            return matchTitle && matchCategory && matchStatus;
+        });
+        todoListTableView.setItems(filteredList);
     }
 
     public void addTodo(TodoItem todoItem) {
@@ -146,7 +168,7 @@ public class MainController implements Initializable {
 
         statusComboBox.setValue("All");
         statusComboBox.getItems().addAll(status);
-        categoryComboBox.setValue("");
+        categoryComboBox.setValue("All");
         categoryComboBox.getItems().addAll(categoryItems);
 
         priorityColumn.setCellFactory(col -> new TableCell<>() {
