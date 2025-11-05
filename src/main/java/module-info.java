@@ -1,4 +1,4 @@
-module com.ezrachai {
+module com.tri {
     requires javafx.controls;
     requires javafx.fxml;
     requires com.fasterxml.jackson.databind;
