@@ -91,7 +91,7 @@ public class MainController implements Initializable {
             return;
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("assignment1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("popup-view.fxml"));
         Parent root = loader.load();
         PopupController popupController = loader.getController();
         popupController.setMainController(this);
@@ -110,7 +110,7 @@ public class MainController implements Initializable {
     }
 
     public void openPopUp() throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("assignment1.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("popup-view.fxml"));
         Parent root = loader.load();
 
         PopupController popupController = loader.getController();
