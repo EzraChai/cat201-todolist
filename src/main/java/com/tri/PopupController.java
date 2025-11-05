@@ -1,4 +1,4 @@
-package com.ezrachai;
+package com.tri;
 
 import java.net.URL;
 import java.time.LocalDate;

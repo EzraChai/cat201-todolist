@@ -5,7 +5,7 @@ module com.ezrachai {
     requires com.fasterxml.jackson.core;
     requires com.fasterxml.jackson.datatype.jsr310;
 
-    opens com.ezrachai to javafx.fxml, com.fasterxml.jackson.databind;
+    opens com.tri to javafx.fxml, com.fasterxml.jackson.databind;
 
-    exports com.ezrachai;
+    exports com.tri;
 }

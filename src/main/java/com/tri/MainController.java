@@ -1,13 +1,11 @@
-package com.ezrachai;
+package com.tri;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -163,7 +161,6 @@ public class MainController implements Initializable {
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
-
         todoList.addAll(TodoStore.load());
         todoListTableView.setItems(todoList);
 
@@ -235,7 +232,6 @@ public class MainController implements Initializable {
                 setDisable(empty || fromDate != null && date.isBefore(fromDate));
             }
         });
-
     }
 
     public void handleExit() {

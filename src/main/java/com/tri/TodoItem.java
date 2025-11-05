@@ -1,4 +1,4 @@
-package com.ezrachai;
+package com.tri;
 
 import javafx.beans.property.*;
 import java.time.LocalDate;
@@ -24,7 +24,6 @@ public class TodoItem {
     private final BooleanProperty status = new SimpleBooleanProperty(false);
 
     public TodoItem() {
-
     }
 
     public TodoItem(String id, String todo, String description, String category, String priority, LocalDate dueDate) {
