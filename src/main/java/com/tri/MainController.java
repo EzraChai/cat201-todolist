@@ -147,8 +147,10 @@ public class MainController implements Initializable {
                     matchStatus = true;
                     break;
             }
-            boolean matchLocalFromDate = fromDate == null || todo.getDueDate().isAfter(fromDate);
-            boolean matchLocalToDate = toDate == null || todo.getDueDate().isBefore(toDate);
+            boolean matchLocalFromDate = fromDate == null || todo.getDueDate().isEqual(fromDate)
+                    || todo.getDueDate().isAfter(fromDate);
+            boolean matchLocalToDate = toDate == null || todo.getDueDate().isEqual(toDate)
+                    || todo.getDueDate().isBefore(toDate);
             return matchTitle && matchCategory && matchStatus && matchLocalFromDate && matchLocalToDate;
         });
         todoListTableView.setItems(filteredList);
